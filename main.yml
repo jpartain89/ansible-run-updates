@@ -1,7 +1,5 @@
 ---
 
-- hosts: all
-
 - impot_roles: apt-updates
   become: true
   when: ansible_os_family == "Debian"
@@ -9,4 +7,4 @@
   when: ansible_os_family == "Darwin"
 - impot_roles: git-autopull
 - impot_roles: pip-upgrade
-  become: true
+  become: trueu
