@@ -14,7 +14,7 @@
     dest: "{{ git_dir.path }}/{{ default_repo }}"
     update: yes
   failed_when: False
-  when: _git_repo_dotfiles_stat|Failed
+  when: _git_repo_dotfiles_stat.stat.exists == "false"
 
 - name: Run git-autopull from the Entry Repo
   shell: /usr/local/bin/git-autopull
