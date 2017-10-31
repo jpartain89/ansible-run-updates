@@ -7,7 +7,7 @@
   register: _brewdate
   failed_when: False
 
-- debug: var=_brewdate.stdout_lines
+- debug: var=_brewdate
 
 - name: Running softwareupdate Command
   shell: 'softwareupdate -ia'
@@ -16,4 +16,4 @@
   register: _softwareupdate
   failed_when: False
 
-- debug: var=_softwareupdate.stdout_lines
+- debug: var=_softwareupdate
