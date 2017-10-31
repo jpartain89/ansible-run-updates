@@ -1,21 +1,26 @@
 ---
 
-- hosts: all
+- name:
+  hosts: all
 
   tasks:
 
-  - import_role:
-    name: apt-updates
+  - name: Running apt-updates
+    import_role:
+      name: apt-updates
     when: ansible_os_family == "Debian"
     become: true
 
-  - import_role:
-    name: brew-updates
+  - name: Running brew-updates
+    import_role:
+      name: brew-updates
     when: ansible_os_family == "Darwin"
 
-  - import_role:
-    name: git-autopull
+  - name: Running git-autopull
+    import_role:
+      name: git-autopull
 
-  - import_role:
-    name: pip-upgrade
+  - name: Running pip-upgrade
+    import_role:
+      name: pip-upgrade
     become: true
