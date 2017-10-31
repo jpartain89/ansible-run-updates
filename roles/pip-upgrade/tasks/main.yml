@@ -3,5 +3,6 @@
 - name: Run my pip-upgrade Script
   script: /usr/local/bin/pip-upgrade
   register: _pip_upgrade
+  become: true
 
 - debug: var=_pip_upgrade

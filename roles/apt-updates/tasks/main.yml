@@ -10,6 +10,7 @@
     - aptitude
     - apt
     - apt-utils
+  become: true
 
 - name: Run Basic, Safe, Full and Dist Upgrade with apt Module
   apt: upgrade="{{ item }}"
@@ -20,6 +21,7 @@
     - dist
   register: _upgrade_apt
   failed_when: False
+  become: true
 
 - debug: var=_upgrade_apt
   when: _upgrade_apt|changed
@@ -28,6 +30,7 @@
   apt: autoremove=yes
   register: _autoclean_apt
   failed_when: False
+  become: true
 
 - debug: var=_autoclean_apt
   when: _autoclean_apt|changed
@@ -36,6 +39,7 @@
   shell: 'apt-get autoremove --purge -y $(dpkg --list | grep "^rc" | awk "{print $2}")'
   register: _autoremove_rc_apt
   failed_when: False
+  become: true
 
 - debug: var=_autoremove_rc_apt
   when: _autoremove_rc_apt|changed
