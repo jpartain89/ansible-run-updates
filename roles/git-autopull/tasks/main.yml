@@ -1,0 +1,27 @@
+---
+
+- name: Stat that the entry Git Repo is Cloned
+  stat:
+    path: "{{ git_dir.path }}/{{ default_repo }}"
+  register: _git_repo_dotfiles_stat
+  failed_when: False
+
+- debug: var=_git_repo_dotfiles_stat
+
+- name: Clone the Dotfiles Repo if its Missing
+  git:
+    repo: "git@github.com:jpartain89/{{ default_repo }}.git"
+    dest: "{{ git_dir.path }}/{{ default_repo }}"
+    update: yes
+  failed_when: False
+  when: _git_repo_dotfiles_stat|Falied
+
+- name: Run git-autopull from the Entry Repo
+  shell: /usr/local/bin/git-autopull
+  args:
+    executable: /bin/bash
+    chdir: "{{ git_dir.path }}/{{ default_repo }}"
+  register: _git_autopull_debug
+  failed_when: False
+
+- debug: var=_git_autopull_debug

@@ -1,0 +1,13 @@
+---
+
+- hosts: all
+
+  roles:
+    - apt-updates
+      become: true
+    - brew-updates
+      become: false
+    - git-autopull
+      become: false
+    - pip-upgrade
+      become: true
