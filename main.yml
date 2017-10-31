@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+
+  roles:
+    - apt-updates
+    - brew-updates
+    - git-autopull
+    - pip-upgrade
