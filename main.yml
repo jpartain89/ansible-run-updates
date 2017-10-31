@@ -2,8 +2,11 @@
 
 - hosts: all
 
-  roles:
-    - apt-updates
-    - brew-updates
-    - git-autopull
-    - pip-upgrade
+- impot_roles: apt-updates
+  become: true
+  when: ansible_os_family == "Debian"
+- impot_roles: brew-updates
+  when: ansible_os_family == "Darwin"
+- impot_roles: git-autopull
+- impot_roles: pip-upgrade
+  become: true
