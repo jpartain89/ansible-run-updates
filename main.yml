@@ -1,10 +1,21 @@
 ---
 
-- impot_role: apt-updates
-  when: ansible_os_family == "Debian"
-  become: true
-- impot_role: brew-updates
-  when: ansible_os_family == "Darwin"
-- impot_role: git-autopull
-- impot_role: pip-upgrade
-  become: trueu
+- hosts: all
+
+  tasks:
+
+  - import_role:
+    name: apt-updates
+    when: ansible_os_family == "Debian"
+    become: true
+
+  - import_role:
+    name: brew-updates
+    when: ansible_os_family == "Darwin"
+
+  - import_role:
+    name: git-autopull
+
+  - import_role:
+    name: pip-upgrade
+    become: true
