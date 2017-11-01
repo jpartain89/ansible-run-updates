@@ -1,7 +1,6 @@
 ---
 
-- name:
-  hosts: all
+- hosts: all
 
   tasks:
 
