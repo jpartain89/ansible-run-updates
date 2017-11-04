@@ -14,10 +14,14 @@
     import_role:
       name: brew-updates
     when: ansible_os_family == "Darwin"
+    environment:
+      PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin"
 
   - name: Running git-autopull
     import_role:
       name: git-autopull
+    environment:
+      PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
 
   - name: Running pip-upgrade
     import_role:

@@ -3,7 +3,7 @@
 - name: Running brewdate
   shell: 'brewdate'
   args:
-    executable: /bin/bash
+    executable: /usr/local/bin/bash
   register: _brewdate
   failed_when: False
 
@@ -12,7 +12,7 @@
 - name: Running softwareupdate Command
   shell: 'softwareupdate -ia'
   args:
-    executable: /bin/bash
+    executable: /usr/local/bin/bash
   register: _softwareupdate
   failed_when: False
 
