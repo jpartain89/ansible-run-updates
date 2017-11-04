@@ -1,0 +1,32 @@
+#!/bin/bash -e
+
+# Script to run this playbook through cron on my RPI:
+# It will attempt to auto-install/update Ansible through pip and then run the
+# playbook.
+
+# Copyright © 2017 JPCDI, JPartain89 and Justin Partain
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+LOG_FILE="${DIR}/logs/ansible-update.log"
+
+PIP_BIN="$(command -v pip)"
+
+# First, install or update ansible with pip
+sudo -H "$PIP_BIN" install -U ansible >/dev/null 2>&1 || exit 1
+
+ANS_PLAY="$(command -v ansible-playbook)"
+
+"${ANS_PLAY}" "${DIR}/main.yml" >>"${LOG_FILE}" 2>&1 &
