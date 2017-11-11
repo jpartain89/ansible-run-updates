@@ -1,9 +1,11 @@
 [macos]
 macbook
 imac
+mark-imac
 
 [mdusa]
-remote-mark
+mark-imac
+mark-server
 
 [raspberry-pi]
 #rpi2
@@ -13,10 +15,7 @@ rpi35 ansible_connection=local
 mdusa
 raspberry-pi
 
-[local-machines:children]
-macos
-raspberry-pi
-
-[non-rpi:children]
-macos
-mdusa
+[local]
+rpi35 ansible_connection=local
+macbook
+imac
