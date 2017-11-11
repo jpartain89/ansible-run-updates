@@ -31,4 +31,4 @@ sudo -H "$PIP_BIN" install -U ansible >/dev/null 2>&1 || exit 1
 
 ANS_PLAY="$(command -v ansible-playbook)"
 
-"${ANS_PLAY}" "${DIR}/main.yml" >>"${LOG_FILE}" 2>&1
+"${ANS_PLAY}" "${DIR}/main.yml" 2>&1 | tee -a "${LOG_FILE}"
