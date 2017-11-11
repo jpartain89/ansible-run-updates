@@ -1,7 +1,9 @@
 ---
 
 - name: Run my pip-upgrade Script
-  script: /usr/local/bin/pip-upgrade
+  shell: /usr/local/bin/pip-upgrade
+  args:
+    executable: /bin/bash
   register: _pip_upgrade
   become: true
 
