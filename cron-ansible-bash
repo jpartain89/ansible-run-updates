@@ -1,4 +1,5 @@
 #!/bin/bash -e
+# shellcheck disable=SC2024
 
 # Script to run this playbook through cron on my RPI:
 # It will attempt to auto-install/update Ansible through pip and then run the
@@ -26,10 +27,11 @@ PIP_BIN="$(command -v pip)"
 
 trap 'exit 1' SIGHUP SIGINT SIGTERM
 
-{ echo "################################################################################";
-echo "###### Starting at $(date '+%m-%d-%Y %H-%M-%S') ########";
-echo "################################################################################" } \
-    >> "${LOG_FILE}"
+{
+    echo "################################################################################";
+    echo "###### Starting at $(date '+%m-%d-%Y %H-%M-%S') ########";
+    echo "################################################################################"; } \
+        >> "${LOG_FILE}"
 
 # First, pull any git updates!
 git -C "${DIR}" pull >>"${LOG_FILE}" 2>&1 || true
@@ -41,7 +43,8 @@ ANS_PLAY="$(command -v ansible-playbook)"
 
 "${ANS_PLAY}" "${DIR}/main.yml" 2>&1 | tee -a "${LOG_FILE}"
 
-{ echo "################################################################################";
-echo "###### Ending at $(date '+%m-%d-%Y %H-%M-%S') ######";
-echo "################################################################################" } \
-    >> "${LOG_FILE}"
+{
+    echo "################################################################################";
+    echo "###### Ending at $(date '+%m-%d-%Y %H-%M-%S') ######";
+    echo "################################################################################"; } \
+        >> "${LOG_FILE}"
