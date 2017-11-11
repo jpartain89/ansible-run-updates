@@ -1,6 +1,6 @@
 ---
 
-- name: Stat that the entry Git Repo is Cloned
+- name: Stat that the Entry Git Repo is Cloned
   stat:
     path: "{{ git_dir.path }}/{{ default_repo }}"
   register: _git_repo_dotfiles_stat
