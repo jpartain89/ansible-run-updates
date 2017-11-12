@@ -1,0 +1,48 @@
++++ dirname /home/jpartain89/git/ansible-run-updates/cron-ansible-bash
+++ cd /home/jpartain89/git/ansible-run-updates
+++ pwd
++ DIR=/home/jpartain89/git/ansible-run-updates
++ LOG_FILE=/home/jpartain89/git/ansible-run-updates/logs/ansible-update.log
+++ command -v pip
++ PIP_BIN=/usr/bin/pip
++ trap 'exit 1' SIGHUP SIGINT SIGTERM
++ echo '################################################################################'
+++ date '+%m-%d-%Y %H-%M-%S'
++ echo '###### Starting at 11-11-2017 06-00-01 ########'
++ echo '################################################################################'
++ git -C /home/jpartain89/git/ansible-run-updates pull
++ sudo -H /usr/bin/pip install -U ansible
+++ command -v ansible-playbook
++ ANS_PLAY=
++++ dirname /home/jpartain89/git/ansible-run-updates/cron-ansible-bash
+++ cd /home/jpartain89/git/ansible-run-updates
+++ pwd
++ DIR=/home/jpartain89/git/ansible-run-updates
++ LOG_FILE=/home/jpartain89/git/ansible-run-updates/logs/ansible-update.log
+++ command -v pip
++ PIP_BIN=/usr/bin/pip
++ trap 'exit 1' SIGHUP SIGINT SIGTERM
++ echo '################################################################################'
+++ date '+%m-%d-%Y %H-%M-%S'
++ echo '###### Starting at 11-11-2017 12-00-01 ########'
++ echo '################################################################################'
++ git -C /home/jpartain89/git/ansible-run-updates pull
++ sudo -H /usr/bin/pip install -U ansible
+++ command -v ansible-playbook
++ ANS_PLAY=
++++ dirname /home/jpartain89/git/ansible-run-updates/cron-ansible-bash
+++ cd /home/jpartain89/git/ansible-run-updates
+++ pwd
++ DIR=/home/jpartain89/git/ansible-run-updates
++ LOG_FILE=/home/jpartain89/git/ansible-run-updates/logs/ansible-update.log
+++ command -v pip
++ PIP_BIN=/usr/bin/pip
++ trap 'exit 1' SIGHUP SIGINT SIGTERM
++ echo '################################################################################'
+++ date '+%m-%d-%Y %H-%M-%S'
++ echo '###### Starting at 11-11-2017 18-00-01 ########'
++ echo '################################################################################'
++ git -C /home/jpartain89/git/ansible-run-updates pull
++ sudo -H /usr/bin/pip install -U ansible
+++ command -v ansible-playbook
++ ANS_PLAY=
