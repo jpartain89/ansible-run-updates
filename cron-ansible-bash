@@ -36,9 +36,6 @@ trap 'exit 1' SIGHUP SIGINT SIGTERM
 # First, pull any git updates!
 git -C "${DIR}" pull >>"${LOG_FILE}" 2>&1 || true
 
-# Second, install or update ansible with pip
-sudo -H "$PIP_BIN" install -U ansible >>"${LOG_FILE}" 2>&1 || true
-
 ANS_PLAY="$(command -v ansible-playbook)"
 
 "${ANS_PLAY}" "${DIR}/main.yml" 2>&1 | tee -a "${LOG_FILE}"

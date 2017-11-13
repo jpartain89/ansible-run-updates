@@ -1,5 +1,15 @@
 ---
 
+- hosts: localhost
+
+  tasks:
+
+    - name: Install/Update Ansible
+      pip:
+        name: ansible
+        state: latest
+      become: true
+
 - hosts: all
 
   tasks:
