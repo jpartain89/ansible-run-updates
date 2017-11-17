@@ -20,6 +20,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 LOG_FILE="${DIR}/logs/ansible-update.log"
 
@@ -34,7 +35,7 @@ trap 'exit 1' SIGHUP SIGINT SIGTERM
         >> "${LOG_FILE}"
 
 # First, pull any git updates!
-git -C "${DIR}" pull >>"${LOG_FILE}" 2>&1 || true
+git -C "${DIR}" pull >>"${LOG_FILE}" 2>&1
 
 ANS_PLAY="$(command -v ansible-playbook)"
 
