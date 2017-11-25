@@ -4,6 +4,10 @@
   lineinfile:
     dest: ~/.config/brewfile/Brewfile
     line: "{{ brewfile_git_repo }}"
+    backup: yes
+  register: _brewfile_git_update
+
+- debug: var=_brewfile_git_update
 
 - name: Running BrewFile Update with Clean
   shell: '/usr/local/bin/brew-file update -C'
