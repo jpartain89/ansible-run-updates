@@ -1,5 +1,16 @@
 ---
 
+- name: Checking (and if not, overwriting) The BrewFile
+  lineinfile:
+    dest: ~/.config/brewfile/Brewfile
+    line: "{{ brewfile_git_repo }}"
+
+- name: Running BrewFile Update with Clean
+  shell: '/usr/local/bin/brew-file update -C'
+  register: _brewfile_update
+
+- debug: var=_brewfile_update
+
 - name: Running brewdate
   shell: 'brewdate'
   args:
