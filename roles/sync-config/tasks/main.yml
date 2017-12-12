@@ -1,5 +1,7 @@
 ---
 
+- include_vars: main.yml
+
 - name: Sync SSH Home Config
   template:
     src: ssh_home_config.j2
