@@ -37,3 +37,8 @@
     import_role:
       name: pip-upgrade
     become: true
+
+  - name: Sync Standard Config Files
+    import_role:
+      name: sync-config
+    become: true

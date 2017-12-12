@@ -1,0 +1,22 @@
+---
+
+ssh_config:
+  host: rpi35
+    hostname: rpi35.jpcdi.com
+    port: 22235
+  host: imac
+    hostname: imac.jpcdi.com
+    proxyjump: rpi35
+  host: macbook
+    hostname: macbook.jpcdi.com
+  host: mark-server
+    hostname: mdusa.jpcdi.com
+  host: mark-imac
+    hostname: 192.168.0.34
+    proxyjump: mark-server
+  host: *
+    user: jpartain89
+    forwardagent: yes
+    controlmaster: Auto
+    controlpath: "~/.ssh/mux-%r@%h:%p"
+    controlpersist: 15m
