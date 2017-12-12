@@ -1,6 +1,6 @@
 # {{ ansible_managed }}
 
-{% for sect in ssh_config %}
+{% for sect in ssh_config.iteritems() %}
 {% if sect == 'proxyjumpers' %}
 {% for host,cfg in sect.iteritems() %}
 Host {{ host }}
