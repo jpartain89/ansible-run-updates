@@ -14,7 +14,7 @@ ssh_config:
   - host: mark-imac
     hostname: 192.168.0.34
     proxyjump: mark-server
-  - host: *
+  - host: "*"
     user: jpartain89
     forwardagent: yes
     controlmaster: Auto
