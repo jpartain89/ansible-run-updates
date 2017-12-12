@@ -1,13 +1,9 @@
 # {{ ansible_managed }}
 
-{% for host in ssh_config %}
-Host {{ host.host }}
-    {% if ssh_config.host.hostname is defined %} HostName {{ ssh_config.host.hostname }} {% endif %}
-    {% if ssh_config.host.port is defined %} Port {{ ssh_config.host.port }} {% endif %}
-    {% if ssh_config.host.proxyjump is defined %} ProxyJump {{ ssh_config.host.proxyjump }} {% endif %}
-    {% if ssh_config.host.user is defined %} User {{ ssh_config.host.user }} {% endif %}
-    {% if ssh_config.host.forwardagent is defined %} ForwardAgent {{ ssh_config.host.forwardagent }} {% endif %}
-    {% if ssh_config.host.controlmaster is defined %} ControlMaster {{ ssh_config.host.controlmaster }} {% endif %}
-    {% if ssh_config.host.controlpath is defined %} ControlPath {{ ssh_config.host.controlpath }} {% endif %}
-    {% if ssh_config.host.controlpersist is defined %} ControlPersist {{ ssh_config.host.controlpersist }} {% endif %}
+{% for host,cfg in ssh_config.iteritems() %}
+Host {{ host }}
+    {% for k,v in cfg.iteritems() %}
+    {{ k }} {{ v }}
+    {% endfor %}
+
 {% endfor %}
