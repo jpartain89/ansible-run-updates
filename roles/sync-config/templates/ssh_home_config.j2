@@ -1,7 +1,7 @@
 # {{ ansible_managed }}
 
 {% if ssh_config.host is defined %}
-{% for host in ssh_config[host] %}
+{% for host in ssh_config.host %}
 Host {{ host }}
     {% if ssh_config.host.hostname is defined %} HostName {{ ssh_config.host.hostname }} {% endif %}
     {% if ssh_config.host.port is defined %} Port {{ ssh_config.host.port }} {% endif %}
