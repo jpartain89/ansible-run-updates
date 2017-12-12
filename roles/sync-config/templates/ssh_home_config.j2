@@ -1,9 +1,28 @@
 # {{ ansible_managed }}
 
-{% for host,cfg in ssh_config.iteritems() %}
+{% for sect in ssh_config %}
+{% if sect is proxyjumpers %}
+{% for host,cfg in sect.iteritems() %}
 Host {{ host }}
     {% for k,v in cfg.iteritems() %}
     {{ k }} {{ v }}
     {% endfor %}
-
+{% endfor %}
+{% endif %}
+{% if sect is servers %}
+{% for host,cfg in sect.iteritems() %}
+Host {{ host }}
+    {% for k,v in cfg.iteritems() %}
+    {{ k }} {{ v }}
+    {% endfor %}
+{% endfor %}
+{% endif %}
+{% if sect is defaults %}
+{% for host,cfg in sect.iteritems() %}
+Host {{ host }}
+    {% for k,v in cfg.iteritems() %}
+    {{ k }} {{ v }}
+    {% endfor %}
+{% endfor %}
+{% endif %}
 {% endfor %}
