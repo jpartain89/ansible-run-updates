@@ -12,4 +12,4 @@
     backup: yes
   register: _ssh_config
 
-- debug: vars=_ssh_config
+- debug: var=_ssh_config
