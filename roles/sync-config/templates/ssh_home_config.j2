@@ -1,6 +1,5 @@
 # {{ ansible_managed }}
 
-{% if ssh_config.host is defined %}
 {% for host in ssh_config %}
 Host {{ host.host }}
     {% if ssh_config.host.hostname is defined %} HostName {{ ssh_config.host.hostname }} {% endif %}
@@ -12,4 +11,3 @@ Host {{ host.host }}
     {% if ssh_config.host.controlpath is defined %} ControlPath {{ ssh_config.host.controlpath }} {% endif %}
     {% if ssh_config.host.controlpersist is defined %} ControlPersist {{ ssh_config.host.controlpersist }} {% endif %}
 {% endfor %}
-{% endif %}
