@@ -1,8 +1,8 @@
 # {{ ansible_managed }}
 
 {% if ssh_config.host is defined %}
-{% for host in ssh_config.host %}
-Host {{ host }}
+{% for host in ssh_config %}
+Host {{ host.host }}
     {% if ssh_config.host.hostname is defined %} HostName {{ ssh_config.host.hostname }} {% endif %}
     {% if ssh_config.host.port is defined %} Port {{ ssh_config.host.port }} {% endif %}
     {% if ssh_config.host.proxyjump is defined %} ProxyJump {{ ssh_config.host.proxyjump }} {% endif %}
