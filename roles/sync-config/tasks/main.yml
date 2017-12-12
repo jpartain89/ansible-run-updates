@@ -10,3 +10,6 @@
     group: "{{ ansible_user_gid }}"
     mode: 0644
     backup: yes
+  register: _ssh_config
+
+- debug: vars=_ssh_config
