@@ -31,7 +31,7 @@ ssh rpi35 '
         echo "Git Adding remotely"
         git add . || true
         echo "Git Commiting remotely"
-        git commit -m "Auto Updates on \"$(date '\+%m-%d-%Y %H-%M-%S'\)\"" || true
+        git commit -m "Auto Updates on \"$(date \'+%m-%d-%Y %H-%M-%S\')\"" || true
         echo "Git Pushing remotely"
         git push
     done
