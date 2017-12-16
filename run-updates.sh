@@ -14,7 +14,7 @@ for i in "${FIRST_REPO}" "${SECOND_REPO}"; do
     echo "Git Adding Locally"
     git add . || true
     echo "Git Commiting Locally"
-    git commit -m "Auto Updates on \"$(date '+%m-%d-%Y %H-%M-%S')\"" || true
+    git commit -m "Auto Updates on \"$(date \"+%m-%d-%Y %H-%M-%S\")\"" || true
     echo "Git Pushing Locally"
     git push
 done
@@ -31,7 +31,7 @@ ssh rpi35 '
         echo "Git Adding remotely"
         git add . || true
         echo "Git Commiting remotely"
-        git commit -m "Auto Updates on \"$(date \'+%m-%d-%Y %H-%M-%S\')\"" || true
+        git commit -m "Auto Updates on \"$(date '\+%m-%d-%Y %H-%M-%S'\)\"" || true
         echo "Git Pushing remotely"
         git push
     done
