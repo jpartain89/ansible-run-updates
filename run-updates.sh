@@ -20,7 +20,7 @@ ssh rpi35 '
     for i in "${THIRD_REPO}" "${FOURTH_REPO}"; do
         cd "${i}" &&
         git add . || true
-        git commit -m "Auto Updates on \"$(date'+%m-%d-%Y %H-%M-%S')\"" || true
+        git commit -m "Auto Updates on \"$(date '+%m-%d-%Y %H-%M-%S')\"" || true
         git push
     done
 
