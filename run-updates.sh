@@ -7,13 +7,13 @@ FIRST_REPO="$HOME/git/ansibleParent/ansible-run-updates"
 SECOND_REPO="$HOME/git/ansibleParent/ansible-vars"
 
 for i in "${FIRST_REPO}" "${SECOND_REPO}"; do
-    echo "CDing to ${i}"
+    echo "CDing to ${i} Locally"
     cd "${i}" &&
-    echo "GIt Adding"
+    echo "Git Adding Locally"
     git add . || true
-    echo "Git Commiting"
+    echo "Git Commiting Locally"
     git commit -m "Auto Updates on \"$(date '+%m-%d-%Y %H-%M-%S')\"" || true
-    echo "Git Pushing"
+    echo "Git Pushing Locally"
     git push
 done
 
@@ -22,13 +22,13 @@ ssh rpi35 '
     FOURTH_REPO="$HOME/git/ansibleParent/ansible-vars"
 
     for i in "${THIRD_REPO}" "${FOURTH_REPO}"; do
-        echo "CDing to ${i}"
+        echo "CDing to ${i} remotely"
         cd "${i}" &&
-        echo "GIt Adding"
+        echo "Git Adding remotely"
         git add . || true
-        echo "Git Commiting"
+        echo "Git Commiting remotely"
         git commit -m "Auto Updates on \"$(date '+%m-%d-%Y %H-%M-%S')\"" || true
-        echo "Git Pushing"
+        echo "Git Pushing remotely"
         git push
     done
 
