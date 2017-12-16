@@ -9,7 +9,7 @@ SECOND_REPO="$HOME/git/ansibleParent/ansible-vars"
 for i in "${FIRST_REPO}" "${SECOND_REPO}"; do
     cd "${i}" &&
     git add . || true
-    git commit -m "Auto Updates on \"$(date'+%m-%d-%Y %H-%M-%S')\"" || true
+    git commit -m "Auto Updates on \"$(date '+%m-%d-%Y %H-%M-%S')\"" || true
     git push
 done
 
