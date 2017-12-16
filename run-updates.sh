@@ -37,5 +37,5 @@ ssh rpi35 '
     done
 
     echo "Running Ansible-Playbook"
-    ansible-playbook "$HOME/git/ansible-run-updates sync_config.yml" &
+    ansible-playbook "$HOME/git/ansible-run-updates sync_config.yml"
 '
