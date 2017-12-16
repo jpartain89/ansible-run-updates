@@ -9,6 +9,8 @@ SECOND_REPO="$HOME/git/ansibleParent/ansible-vars"
 for i in "${FIRST_REPO}" "${SECOND_REPO}"; do
     echo "CDing to ${i} Locally"
     cd "${i}" &&
+    echo "Pulling Git First Locally"
+    git pull || true
     echo "Git Adding Locally"
     git add . || true
     echo "Git Commiting Locally"
@@ -24,6 +26,8 @@ ssh rpi35 '
     for i in "${THIRD_REPO}" "${FOURTH_REPO}"; do
         echo "CDing to ${i} remotely"
         cd "${i}" &&
+        echo "Pulling Git First remotely"
+        git pull || true
         echo "Git Adding remotely"
         git add . || true
         echo "Git Commiting remotely"
