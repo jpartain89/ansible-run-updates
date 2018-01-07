@@ -3,7 +3,9 @@
 # This is to add changed files to git, auto-commit, push it, then remotely
 # access my raspberry pi to pull it down and run the updates play.
 
-FIRST_REPO="$HOME/git/ansibleParent/ansible-run-updates"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+FIRST_REPO="$DIR"
+#FIRST_REPO="$HOME/git/ansibleParent/ansible-run-updates"
 SECOND_REPO="$HOME/git/ansibleParent/ansible-vars"
 
 for i in "${FIRST_REPO}" "${SECOND_REPO}"; do
