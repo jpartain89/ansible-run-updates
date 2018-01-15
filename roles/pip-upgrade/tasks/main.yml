@@ -1,5 +1,12 @@
 ---
 
+- name: Install Universally Used pip Apps
+  pip:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - "{{ universal_pip }}"
+
 - name: Run my pip-upgrade Script
   shell: /usr/local/bin/pip-upgrade
   args:

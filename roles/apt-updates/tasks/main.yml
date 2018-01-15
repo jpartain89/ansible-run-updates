@@ -12,6 +12,16 @@
     - apt-utils
   become: true
 
+- name: Confirm Universally Required Apps Are Installed
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 21600
+  with_items:
+    - "{{ universal_apt }}"
+  become: true
+
 - name: Run Basic, Safe, Full and Dist Upgrade with apt Module
   apt: upgrade="{{ item }}"
   with_items:
