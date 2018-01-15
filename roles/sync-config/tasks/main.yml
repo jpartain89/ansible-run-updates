@@ -11,3 +11,16 @@
   register: _ssh_config
 
 - debug: var=_ssh_config
+
+- name: Sync Low Level SSH Configs
+  template:
+    src: etc_{{ item }}_config.j2
+    dest: /etc/ssh/{{ item }}_config
+    backup: yes
+  with_items:
+    - ssh
+    - sshd
+  register: _etc_ssh_config
+  when: ansible_os_family == "Debian"
+
+- debug: var=_etc_ssh_config
