@@ -1,0 +1,24 @@
+---
+
+- name: Apply Critical and Security Windows Updates
+  win_updates:
+    category_names:
+      - SecurityUpdates
+      - CriticalUpdates
+      - UpdateRollups
+      - Application
+      - Connectors
+      - DefinitionUpdates
+      - DeveloperKits
+      - FeaturePacks
+      - Guidance
+      - ServicePacks
+      - Tools
+      - Updates
+  register: _win_update
+
+- debug: var=_win_update
+
+- name: Reboot If Required
+  win_reboot:
+  when: _win_update.reboot_required  
