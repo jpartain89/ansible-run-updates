@@ -19,6 +19,7 @@
       name: apt-updates
     when: ansible_os_family == "Debian"
     become: true
+    tags: apt
 
   - name: Running brew-updates
     import_role:
@@ -26,24 +27,29 @@
     when: ansible_os_family == "Darwin"
     environment:
       PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin"
+    tags: brew
 
   - name: Running git-autopull
     import_role:
       name: git-autopull
     environment:
       PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
+    tags: autopull
 
   - name: Running pip-upgrade
     import_role:
       name: pip-upgrade
     become: true
+    tags: pip
 
   - name: Sync Standard Config Files
     import_role:
       name: sync-config
     become: true
+    tags: config
 
   - name: Run Windows Updates
     import_role:
       name: windows-updates
     when: ansible_os_family == "Windows"
+    tags: windows
