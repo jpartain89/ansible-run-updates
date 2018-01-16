@@ -42,3 +42,8 @@
     import_role:
       name: sync-config
     become: true
+
+  - name: Run Windows Updates
+    import_role:
+      name: windows-updates
+    when: ansible_os_family == "Windows"
