@@ -1,0 +1,27 @@
+#!/bin/bash -e
+
+# Ansible-Run-Updates Cron
+
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+LOG_FILE="${DIR}/logs/ansible-update.log"
+
+PIP_BIN="$(command -v pip)"
+
+trap 'exit 1' SIGHUP SIGINT SIGTERM
+
+{
+    echo "################################################################################";
+    echo "###### Starting at $(date '+%m-%d-%Y %H:%M:%S') ########";
+    echo "################################################################################";
+
+    sudo -H "$PIP_BIN" install --upgrade ansible 2>&1 ;
+    git -C "$DIR" autopull 2>&1 ;
+    git -C /home/jpartain89/git/ansibleParent/ansible-vars autopull 2>&1;
+
+    ANS_PLAY="$(command -v ansible-playbook)" 2>&1;
+    "${ANS_PLAY}" "${DIR}/main.yml" 2>&1;
+
+    echo "################################################################################";
+    echo "###### Ending at $(date '+%m-%d-%Y %H:%M:%S') ######";
+    echo "################################################################################"; } 2>&1 | sudo tee -a "$LOG_FILE"
