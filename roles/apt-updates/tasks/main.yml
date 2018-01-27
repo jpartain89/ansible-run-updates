@@ -44,12 +44,3 @@
 
 - debug: var=_autoclean_apt
   when: _autoclean_apt|changed
-
-- name: Run my AutoRemove apt Command String
-  shell: 'apt-get autoremove --purge -y $(dpkg --list | grep "^rc" | awk "{print $2}")'
-  register: _autoremove_rc_apt
-  failed_when: False
-  become: true
-
-- debug: var=_autoremove_rc_apt
-  when: _autoremove_rc_apt|changed
