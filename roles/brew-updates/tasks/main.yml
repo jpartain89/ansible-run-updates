@@ -26,12 +26,6 @@
 
 - debug: var=_brewfile_git_update
 
-- name: Running BrewFile Update with Clean
-  shell: '/usr/local/bin/brew-file update -C'
-  register: _brewfile_update
-
-- debug: var=_brewfile_update
-
 - name: Running brewdate
   shell: 'brewdate'
   args:
@@ -40,6 +34,12 @@
   failed_when: False
 
 - debug: var=_brewdate
+
+#- name: Running BrewFile Update with Clean
+#  shell: '/usr/local/bin/brew-file update -C'
+#  register: _brewfile_update
+#
+#- debug: var=_brewfile_update
 
 - name: Running softwareupdate Command
   shell: 'softwareupdate -ia'
