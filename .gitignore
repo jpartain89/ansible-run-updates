@@ -1,5 +1,6 @@
 facts.d
 cache
+*.log
 
 .DS_Store
 .DS_Store?
