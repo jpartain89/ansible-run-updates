@@ -24,3 +24,22 @@
   when: ansible_os_family == "Debian"
 
 - debug: var=_etc_ssh_config
+
+- name: Create Master Paths File
+  template:
+    src: mac_main_path.j2
+    dest: /etc/paths
+  register: _main_paths
+  when: ansible_os_family == "Darwin"
+
+- debug: var=_main_paths
+
+- name: Create Paths Files
+  template:
+    src: mac_paths.j2
+    dest: "/etc/paths.d/{{ item.name }}"
+  with: mac_path
+  register: _paths_files
+  when: ansible_os_family == "Debian"
+
+- debug: var=_paths_files
