@@ -7,4 +7,4 @@
   - name: Running Sync Configs
     import_role:
       name: sync-config
-    become: false
+    become: true
