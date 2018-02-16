@@ -10,6 +10,13 @@
       PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
     tags: autopull
 
+  - name: Running install-apt
+    import_role:
+      name: install-apt
+    when: ansible_os_family == "Debian"
+    become: true
+    tags: apt
+
   - name: Running apt-updates
     import_role:
       name: apt-updates
