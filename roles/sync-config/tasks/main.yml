@@ -40,6 +40,6 @@
     dest: "/etc/paths.d/{{ item.name }}"
   with: mac_path
   register: _paths_files
-  when: ansible_os_family == "Debian"
+  when: ansible_os_family == "Darwin"
 
 - debug: var=_paths_files

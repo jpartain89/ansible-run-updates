@@ -1,5 +1,5 @@
 # {{ ansible_managed }}
 
-{% for lines in main_mac_path.name.iteritems() %}
+{% for name,lines in main_mac_path.name %}
 {{ lines }}
 {% endfor %}
