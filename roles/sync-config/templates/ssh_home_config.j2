@@ -1,27 +1,27 @@
 # {{ ansible_managed }}
 
 {% if ssh_config.proxyjumpers is defined %}
-{% for host,cfg in ssh_config.proxyjumpers.iteritems() %}
+{% for host,cfg in ssh_config.proxyjumpers.items() %}
 Host {{ host }}
-    {% for k,v in cfg.iteritems() %}
+    {% for k,v in cfg.items() %}
     {{ k }} {{ v }}
     {% endfor %}
 
 {% endfor %}
 {% endif %}
 {% if ssh_config.servers is defined %}
-{% for host,cfg in ssh_config.servers.iteritems() %}
+{% for host,cfg in ssh_config.servers.items() %}
 Host {{ host }}
-    {% for k,v in cfg.iteritems() %}
+    {% for k,v in cfg.items() %}
     {{ k }} {{ v }}
     {% endfor %}
 
 {% endfor %}
 {% endif %}
 {% if ssh_config.defaults is defined %}
-{% for host,cfg in ssh_config.defaults.iteritems() %}
+{% for host,cfg in ssh_config.defaults.items() %}
 Host {{ host }}
-    {% for k,v in cfg.iteritems() %}
+    {% for k,v in cfg.items() %}
     {{ k }} {{ v }}
     {% endfor %}
 

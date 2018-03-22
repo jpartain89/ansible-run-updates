@@ -1,5 +1,6 @@
+{% set mac_path = item -%}
 # {{ ansible_managed }}
 
-{% for name,lines in mac_path.name.iteritems() %}
-{{ lines }}
+{% for location in mac_path.name %}
+{{ location }}
 {% endfor %}
