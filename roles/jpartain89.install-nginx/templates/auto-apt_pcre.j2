@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+cd "/tmp/nginx/{{ pcre_version }}" &&
+
+sudo auto-apt run ./configure &&
+sudo make &&
+sudo checkinstall -y \
+    --maintainer {{ ansible_user_id }} \
+    --pkgname pcre \
+    --pkgversion {{ pcre_version }} \
+    --pakdir /tmp/nginx

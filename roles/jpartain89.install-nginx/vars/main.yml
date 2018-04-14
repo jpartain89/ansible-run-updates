@@ -1,0 +1,7 @@
+---
+# vars file for install-nginx
+
+nginx_version: "nginx-1.13.9"
+pcre_version: "pcre-8.41"
+zlib_version: "zlib-1.2.11"
+openssl_version: "openssl-1.1.0f"

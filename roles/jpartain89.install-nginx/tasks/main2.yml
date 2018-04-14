@@ -1,0 +1,98 @@
+---
+
+- name: Install Required PreRequisites - apt
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 32400
+  with_items:
+    - "{{ nginx_prerequisites }}"
+
+- name: Create Master tmp Directory
+  file:
+    path: /tmp/nginx
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
+    state: directory
+    mode: 0775
+
+- name: Create Master tmp Directory
+  file:
+    path: /tmp/nginx
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
+    state: directory
+    mode: 0775
+  delegate_to: localhost
+
+- name: Create NGINX Directories
+  file:
+    path: "{{ item }}"
+    owner: root
+    group: root
+    state: directory
+    mode: 0775
+  with_items:
+    - "/usr/lib/nginx/modules"
+    - "/var/log/nginx"
+    - "/var/cache/nginx/tmp_proxy"
+    - "/var/lib/nginx/body"
+
+- name: Test if PCRE is Installed
+  command: 'dpkg -l pcre'
+  args:
+    warn: no
+  register: _pcre_installed
+  failed_when: _pcre_installed.rc > 1
+  changed_when: no
+
+- debug: var=_pcre_installed
+
+- name: Run PCRE Steps
+  include_tasks: pcre.yml
+  when: _pcre_installed.rc != 0
+  notify: Delete PCRE Script
+
+- name: Test if ZLIB is Installed
+  command: 'dpkg -l zlib'
+  args:
+    warn: no
+  register: _zlib_installed
+  failed_when: _zlib_installed.rc > 1
+  changed_when: no
+
+- debug: var=_zlib_installed
+
+- name: Run ZLIB Steps
+  include_tasks: zlib.yml
+  when: _zlib_installed.rc != 0
+  notify: Delete ZLIB Script
+
+- name: Test if OpenSSL is Installed
+  command: 'dpkg -l openssl'
+  args:
+    warn: no
+  register: _openssl_installed
+  failed_when: _openssl_installed.rc > 1
+  changed_when: no
+
+- debug: var=_openssl_installed
+
+- name: Run OpenSSL Steps
+  include_tasks: openssl.yml
+  when: _openssl_installed.rc != 0
+  notify: Delete OpenSSL Script
+
+- name: Git Clone Any Additional Static Modules
+  git:
+    repo: "{{ item.address }}"
+    dest: "/tmp/nginx/{{ item.name }}"
+    clone: yes
+    update: yes
+  with_items:
+    - "{{ nginx_module }}"
+
+- name: Run NGINX Steps
+  include_tasks: nginx.yml
+  notify: Delete All tmp Files

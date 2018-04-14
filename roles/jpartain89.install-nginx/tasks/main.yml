@@ -1,0 +1,6 @@
+---
+
+- name: Running Main2 for sudoing Everything
+  include_tasks: main2.yml
+  become: true
+  remote_user: "{{ ansible_user_id }}"

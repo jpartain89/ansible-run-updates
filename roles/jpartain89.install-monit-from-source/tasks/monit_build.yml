@@ -1,0 +1,32 @@
+---
+# monit/tasks/build_monit.yml
+
+- name: Create auto-apt_monit Script from Template
+  template:
+    src: auto-apt_monit.j2
+    dest: "/tmp/auto-apt_monit.sh"
+    mode: 0775
+  register: _auto_apt_monit
+  delegate_to: localhost
+
+- debug: var=_auto_apt_monit
+
+- name: Run auto-apt_monit.sh
+  script: /tmp/auto-apt_monit.sh
+  register: _auto_apt_monit_sh
+  notify: Remove tmp Files
+
+- debug: var=_auto_apt_monit_sh
+
+- name: Debian | Hold Monit Package
+  dpkg_selections:
+    name: monit
+    selection: hold
+  when: ansible_os_family == "Debian"
+  become: true
+
+- name: Run make cleanall
+  shell: 'make cleanall'
+  args:
+    chdir: "{{ monit_git_repo_dest }}"
+  become: true

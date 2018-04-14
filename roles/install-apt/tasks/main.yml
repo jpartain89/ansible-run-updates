@@ -49,7 +49,7 @@
   become_user: root
   become: true
 
-- debug: var=upgrade_apt
+#- debug: var=upgrade_apt
 
 - name: sudo apt-get dist-upgrade
   apt:
@@ -58,24 +58,27 @@
   become_user: root
   become: true
 
-- debug: var=dist_apt
+#- debug: var=dist_apt
 
-- name: sudo apt-get autoclean
-  shell: 'apt-get autoclean -y'
+- name: apt-get autoclean
+  apt:
+    autoclean: yes
   register: autoclean_apt
   become_user: root
   become: true
+  failed_when: false
 
-- debug: var=autoclean_apt
+#- debug: var=autoclean_apt
 
 - name: AutoRemove Apt Packages
-  shell:  'apt-get autoremove -y'
+  apt:
+    autoremove: yes
+    purge: yes
   register: ara
-  changed_when: false
   become_user: root
   become: true
 
-- debug: var=ara
+#- debug: var=ara
 
 - name: Autoremove "rc" labeled apps
   shell:
@@ -84,4 +87,4 @@
   become_user: root
   become: true
 
-- debug: var=autoremove_rc_apt
+#- debug: var=autoremove_rc_apt

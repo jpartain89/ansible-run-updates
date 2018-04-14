@@ -1,0 +1,5 @@
+---
+
+monit_binary_html: "https://mmonit.com/monit/dist/binary/"
+monit_executable: /usr/local/bin/monit
+monitrc_conf: /etc/monitrc

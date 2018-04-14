@@ -1,51 +1,83 @@
 ---
 
 - hosts: all
+  environment:
+    PATH: /usr/local/opt/python@2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin
 
   tasks:
   - name: Running git-autopull
-    import_role:
+    include_role:
       name: git-autopull
     environment:
       PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
     tags: autopull
 
+- hosts: all
+  environment:
+    PATH: /usr/local/opt/python@2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin
+
+  tasks:
   - name: Running install-apt
-    import_role:
+    include_role:
       name: install-apt
     when: ansible_os_family == "Debian"
     become: true
     tags: apt
 
+- hosts: all
+  environment:
+    PATH: /usr/local/opt/python@2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin
+
+  tasks:
   - name: Running apt-updates
-    import_role:
+    include_role:
       name: apt-updates
     when: ansible_os_family == "Debian"
     become: true
     tags: apt
 
+- hosts: all
+  environment:
+    PATH: /usr/local/opt/python@2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin
+
+  tasks:
   - name: Running pip-upgrade
-    import_role:
+    include_role:
       name: pip-upgrade
     become: true
     tags: pip
 
+- hosts: all
+  environment:
+    PATH: /usr/local/opt/python@2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin
+
+  tasks:
   - name: Sync Standard Config Files
-    import_role:
+    include_role:
       name: sync-config
     become: true
     tags: config
 
+- hosts: all
+  environment:
+    PATH: /usr/local/opt/python@2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin
+
+  tasks:
   - name: Running brew-updates
-    import_role:
+    include_role:
       name: brew-updates
     when: ansible_os_family == "Darwin"
     environment:
       PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin"
     tags: brew
 
+- hosts: all
+  environment:
+    PATH: /usr/local/opt/python@2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin
+
+  tasks:
   - name: Run Windows Updates
-    import_role:
+    include_role:
       name: windows-updates
     when: ansible_os_family == "Windows"
     tags: windows

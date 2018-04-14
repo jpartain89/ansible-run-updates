@@ -1,0 +1,4 @@
+---
+
+monit_os_var: "macos-x64"
+monit_group: wheel

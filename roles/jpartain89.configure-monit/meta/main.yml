@@ -1,0 +1,27 @@
+---
+galaxy_info:
+  author: Justin Partain
+  description: Ansible role for configuring Monit.
+  min_ansible_version: 2.4
+  license: MIT
+  platforms:
+  - name: Debian
+    versions:
+    - all
+  - name: EL
+    versions:
+    - all
+  - name: RedHat
+    version:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
+  - name: macOS
+    versions:
+    - all
+
+  galaxy_tags:
+    - monitoring
+    - system
+dependencies: []

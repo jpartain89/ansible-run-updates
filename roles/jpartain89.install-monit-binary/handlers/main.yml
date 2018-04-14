@@ -1,0 +1,14 @@
+---
+
+- name: Debian | Restart Monit
+  service:
+    name: monit
+    enabled: yes
+    state: restarted
+  failed_when: false
+  when: ansible_os_family == 'Debian'
+
+- name: macOS | Restart Monit
+  shell: '/usr/local/bin/lunchy restart -w com.tildeslash.monit'
+  become: true
+  when: ansible_os_family == 'Darwin'

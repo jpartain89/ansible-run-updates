@@ -1,0 +1,9 @@
+{
+  "logrotate_configured_files": [
+{% for files in logrotate_files %}
+    "{{ files.name }}",
+    "{{ files.name }}.old"
+{% endfor %}
+    "empty"
+  ]
+}

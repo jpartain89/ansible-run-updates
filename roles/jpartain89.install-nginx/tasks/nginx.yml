@@ -1,0 +1,27 @@
+---
+# tasks file for nginx.yml
+
+- name: Download NGINX Source | NGINX
+  unarchive:
+    src: "{{ nginx_url }}"
+    dest: "/tmp/nginx"
+    remote_src: yes
+    owner: "{{ ansible_user_uid }}"
+    group: "{{ ansible_user_gid }}"
+
+- name: Create auto-apt_nginx Script from Template | NGINX
+  template:
+    src: auto-apt_nginx.j2
+    dest: "/tmp/nginx/auto-apt_nginx.sh"
+    mode: 0775
+  register: _auto_apt_nginx
+  delegate_to: localhost
+
+- debug: var='_auto_apt_nginx'
+
+- name: Run Created Shell Script | NGINX
+  script: "/tmp/nginx/auto-apt_nginx.sh"
+  register: _auto_apt_nginx_sh
+  notify: Delete OpenSSL Script
+
+- debug: var=_auto_apt_nginx_sh

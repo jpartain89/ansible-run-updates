@@ -1,0 +1,40 @@
+---
+
+- name: Debian | Create Autostart Script
+  template:
+    src: monit.service.j2
+    dest: /lib/systemd/system/monit.service
+    owner: root
+    group: "{{ monit_group }}"
+    mode: 0644
+  when: ansible_os_family == "Debian"
+  become: true
+  register: _debian_autostart_script
+
+- name: macOS | Create Launchd Script
+  template:
+    src: com.tildeslash.monit.plist.j2
+    dest: /Library/LaunchDaemons/com.tildeslash.monit.plist
+    owner: root
+    group: "{{ monit_group }}"
+    mode: 0644
+  when: ansible_os_family == "Darwin"
+  become: true
+  register: _macos_autostart_script
+
+- name: Debian | Register Monit's Autostart Script
+  service:
+    state: started
+    name: monit
+    enabled: yes
+  when:
+    - _debian_autostart_script|changed
+    - ansible_os_family == "Debian"
+  failed_when: false
+
+- name: macOS | Register Monit's Autostart Script
+  command: '/usr/local/bin/lunchy start -w com.tildeslash.monit'
+  when:
+    - _macos_autostart_script|changed
+    - ansible_os_family == "Darwin"
+  become: true

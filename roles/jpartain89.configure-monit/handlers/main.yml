@@ -1,0 +1,5 @@
+---
+
+- name: restart monit
+  shell: "{{ monit_executable }} -c {{ monitrc_conf }} reload"
+  become: true

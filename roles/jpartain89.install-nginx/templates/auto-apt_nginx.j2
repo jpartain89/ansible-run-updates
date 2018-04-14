@@ -1,0 +1,33 @@
+#!/bin/bash -e
+
+cd "/tmp/nginx/{{ nginx_version }}" &&
+
+sudo auto-apt run ./configure \
+    --prefix={{ nginx_script.prefix }} \
+    --sbin-path={{ nginx_script.sbin_path }} \
+    --conf-path={{ nginx_script.conf_path }} \
+    --http-log-path={{ nginx_script.http_log_path }} \
+    --error-log-path={{ nginx_script.error_log_path }} \
+    --lock-path={{ nginx_script.lock_path }} \
+    --pid-path={{ nginx_script.pid_path }} \
+    --modules-path={{ nginx_script.modules_path }} \
+    --http-client-body-temp-path={{ nginx_script.http_client_body_temp_path }} \
+    --http-fastcgi-temp-path={{ nginx_script.http_fastcgi_temp_path }} \
+    --http-proxy-temp-path={{ nginx_script.http_proxy_temp_path }} \
+    --http-scgi-temp-path={{ nginx_script.http_scgi_temp_path }} \
+    --http-uwsgi-temp-path={{ nginx_script.http_uwsgi_temp_path }} \
+    {% for with in nginx_script.with %}
+    --with-{{ with }} \
+    {% endfor %}
+    {% if nginx_module is defined %}
+    {% for name in nginx_module %}
+    --add-module=../{{ name.name }} \
+    {% endfor %}{% endif %}
+    --with-http_v2_module
+
+sudo make &&
+sudo checkinstall -y \
+    --maintainer {{ ansible_user_id }} \
+    --pkgname nginx \
+    --pkgversion {{ nginx_version }} \
+    --pakdir /tmp/nginx

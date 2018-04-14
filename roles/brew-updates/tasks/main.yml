@@ -24,7 +24,7 @@
     backup: yes
   register: _brewfile_git_update
 
-- debug: var=_brewfile_git_update
+#- debug: var=_brewfile_git_update
 
 - name: Running brewdate
   shell: 'brewdate'
@@ -33,7 +33,7 @@
   register: _brewdate
   failed_when: False
 
-- debug: var=_brewdate
+#- debug: var=_brewdate
 
 #- name: Running BrewFile Update with Clean
 #  shell: '/usr/local/bin/brew-file update -C'
@@ -48,4 +48,4 @@
   register: _softwareupdate
   failed_when: False
 
-- debug: var=_softwareupdate
+#- debug: var=_softwareupdate

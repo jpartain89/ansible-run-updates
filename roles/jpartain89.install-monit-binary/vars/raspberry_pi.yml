@@ -1,0 +1,4 @@
+---
+
+monit_os_var: "linux-arm"
+monit_group: root

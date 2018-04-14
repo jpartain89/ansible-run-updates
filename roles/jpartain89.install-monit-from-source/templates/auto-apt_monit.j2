@@ -1,0 +1,18 @@
+#!/bin/bash -e
+
+# {{ ansible_managed }}
+
+cd "{{ monit_git_repo_dest }}" &&
+
+./bootstrap &&
+./configure "{{ monit_configure_options }}" &&
+make &&
+
+if [[ $(uname -s) == 'Linux' ]]; then
+    sudo checkinstall -y \
+        --pkgversion  "$(awk '/Version/{print $NF}' ./CHANGES  | head -1)" \
+        --maintainer {{ ansible_user_id }} \
+        --pkgname monit
+else
+    sudo make install
+fi

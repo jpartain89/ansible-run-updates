@@ -1,0 +1,20 @@
+---
+
+monitrc_conf: /etc/monitrc
+monit_group: root
+
+# required apt_apps to build monit
+monit_apt_apps:
+  - libtool
+  - gcc
+  - bison
+  - libbison-dev
+  - flex
+  - libfl-dev
+  - make
+  - automake
+  - autoconf
+  - build-essential
+  - libpam0g
+  - libpam0g-dev
+  - checkinstall

@@ -6,7 +6,7 @@
   register: _git_repo_dotfiles_stat
   failed_when: False
 
-- debug: var=_git_repo_dotfiles_stat
+#- debug: var=_git_repo_dotfiles_stat
 
 - name: Clone the Dotfiles Repo if its Missing
   git:
@@ -24,4 +24,4 @@
   register: _git_autopull_debug
   failed_when: False
 
-- debug: var=_git_autopull_debug
+#- debug: var=_git_autopull_debug

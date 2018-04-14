@@ -1,0 +1,4 @@
+---
+
+monit_os_var: "linux-x64"
+monit_group: root

@@ -6,12 +6,9 @@
     state: latest
   with_items:
     - "{{ universal_pip }}"
+  failed_when: false
 
 - name: Run my pip-upgrade Script
-  shell: /usr/local/bin/pip-upgrade
-  args:
-    executable: /bin/bash
+  script: pip-upgrade
   register: _pip_upgrade
   become: true
-
-- debug: var=_pip_upgrade

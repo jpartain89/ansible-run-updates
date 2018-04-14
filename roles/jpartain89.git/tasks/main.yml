@@ -1,0 +1,41 @@
+---
+
+- name: Install Git | Linux
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 86400
+  with_items:
+    - "{{ git_apt_apps }}"
+  become: true
+  when: ansible_os_family == "Debian"
+
+- name: Install Git | macOS
+  homebrew:
+    install_options: "{{ item }}"
+    state: present
+    name: git
+  with_items:
+    - "{{ brew_git_options }}"
+  when: ansible_os_family == "Darwin"
+
+- name: Confirm the Git Directory Exists
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+  with_items:
+    - "{{ git_dir }}"
+
+- name: Clone git repos
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+    update: yes
+    accept_hostkey: yes
+    recursive: yes
+  with_items:
+    - "{{ git_cloning }}"
+  register: standard_git_cloned

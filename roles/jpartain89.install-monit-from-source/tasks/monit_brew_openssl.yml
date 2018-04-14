@@ -1,0 +1,13 @@
+---
+# monit_from_source/tasks/monit_brew_openssl.yml
+
+- name:  Install OpenSSL Through Homebrew
+  homebrew:
+    name: openssl
+    state: latest
+
+- name: Link Homebrew's OpenSSL to /opt/local
+  file:
+    src: /usr/local/opt/openssl/include/openssl
+    dest: /usr/local/include/openssl
+    state: link

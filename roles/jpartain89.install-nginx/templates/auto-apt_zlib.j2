@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+cd "/tmp/nginx/{{ zlib_version }}" &&
+
+sudo auto-apt run ./configure &&
+sudo make &&
+sudo checkinstall -y \
+    --maintainer {{ ansible_user_id }} \
+    --pkgname zlib \
+    --pkgversion {{ zlib_version }} \
+    --pakdir /tmp/nginx

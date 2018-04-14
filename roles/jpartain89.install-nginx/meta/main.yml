@@ -1,0 +1,24 @@
+galaxy_info:
+  author: Justin Partain
+  description: Install NGINX and dependencies From Source
+  company: JPCDI
+
+  license: license (GPLv3)
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: Ubuntu
+      versions:
+      - trusty
+      - xenial
+    - name: Debian
+      versions:
+      - stretch
+      - wheezy
+
+  galaxy_tags:
+    - NGINX
+    - Source Install
+
+dependencies: []

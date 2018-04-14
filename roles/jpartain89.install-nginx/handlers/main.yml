@@ -1,0 +1,33 @@
+---
+
+- name: Delete OpenSSL Script
+  file:
+    path: files/auto-apt_openssl.sh
+    state: absent
+  delegate_to: localhost
+
+- name: Delete PCRE Script
+  file:
+    path: files/auto-apt_pcre.sh
+    state: absent
+  delegate_to: localhost
+
+- name: Delete ZLIB Script
+  file:
+    path: files/auto-apt_zlib.sh
+    state: absent
+  delegate_to: localhost
+
+- name: Delete NGINX Script
+  file:
+    path: files/auto-apt_nginx.sh
+    state: absent
+  delegate_to: localhost
+
+- name: Delete All tmp Files
+  shell: "rm -rf /tmp/nginx"
+  become: true
+
+- name: Reload NGINX
+  shell: '/etc/init.d/nginx upgrade_nginx'
+  become: true

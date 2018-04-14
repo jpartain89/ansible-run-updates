@@ -11,9 +11,9 @@
   register: _ssh_config
   failed_when: false
 
-- name: Output ssh_configs debug
-  debug: var=_ssh_config
-  when: _ssh_config|failed
+#- name: Output ssh_configs debug
+#  debug: var=_ssh_config
+#  when: _ssh_config|failed
 
 - name: Sync Low Level SSH Configs
   template:
@@ -27,9 +27,9 @@
   when: ansible_os_family == "Debian"
   failed_when: false
 
-- name: Output etc_ssh_config Debug
-  debug: var=_etc_ssh_config
-  when: _etc_ssh_config|failed
+#- name: Output etc_ssh_config Debug
+#  debug: var=_etc_ssh_config
+#  when: _etc_ssh_config|failed
 
 - name: Create Master Paths File
   template:
@@ -39,9 +39,9 @@
   when: ansible_os_family == "Darwin"
   failed_when: false
 
-- name: Output main_paths Debug
-  debug: var=_main_paths
-  when: _main_paths|failed
+#- name: Output main_paths Debug
+#  debug: var=_main_paths
+#  when: _main_paths|failed
 
 - name: Create Paths Files
   template:
@@ -52,6 +52,6 @@
   with_items: "{{ mac_path }}"
   failed_when: false
 
-- name: Output paths_files Debug
-  debug: var=_paths_files
-  when: _paths_files|failed
+#- name: Output paths_files Debug
+#  debug: var=_paths_files
+#  when: _paths_files|failed
