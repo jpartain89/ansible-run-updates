@@ -1,5 +1,0 @@
----
-
-- include: openvpn.yml
-  when: openvpn_enabled
-  tags: [openvpn]
