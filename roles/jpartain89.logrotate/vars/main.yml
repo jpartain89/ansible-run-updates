@@ -1,4 +1,0 @@
----
-
-logrotate_empty:
-  - name: empty

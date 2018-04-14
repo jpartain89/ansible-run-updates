@@ -1,6 +1,0 @@
----
-
-- name: Remove tmp Files
-  file:
-    path: /tmp/auto-apt_monit.sh
-    state: absent
