@@ -39,13 +39,13 @@ if [ -f "$PIDFILE" ]; then
         exit 1
     else
         ## Process not found assume not running
-        if echo $$ > "$PIDFILE" == 1; then
+        if [[ "$(echo $$ > "$PIDFILE")" == 1 ]]; then
             echo "Could not create PID file"
             exit 1
         fi
     fi
 else
-    if echo $$ > "$PIDFILE" == 1; then
+    if [[ "$(echo $$ > "$PIDFILE")" == 1 ]]; then
         echo "Could not create PID file"
         exit 1
     fi
