@@ -20,7 +20,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#exec 1> >(logger -s -t "$(basename "$0")") 2>&1
+exec 1> >(logger -s -t "$(basename "$0")") 2>&1
 
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
