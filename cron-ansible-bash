@@ -34,7 +34,7 @@ trap 'rm $PIDFILE; exit 1' SIGHUP SIGINT SIGTERM
 
 if [ -f "$PIDFILE" ]; then
     PID=$(cat "${PIDFILE}")
-    ps -p "$PID" >/dev/null 2>&1
+    ps -p "$PID" >/dev/null 2>&1 || true
     if [ $? -eq 0 ]; then
         echo "Job is already running"
         exit 1
