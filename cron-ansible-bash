@@ -53,7 +53,10 @@ fi
 
 # First, we will install/update ansible using pip
 sudo -H "${PIP_BIN}" install --upgrade ansible 2>&1 || \
-    { echo "For some reason, the installation/upgrade of Ansible failed!"; exit 1 }
+    {
+    echo "For some reason, the installation/upgrade of Ansible failed!"; \
+    exit 1
+    }
 
 # Next, we pull down any git updates.
 git -C "${DIR}" pull 2>&1;
