@@ -12,11 +12,6 @@
       PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
     tags: autopull
 
-- hosts: unix
-  environment:
-    PATH: /usr/local/opt/python@2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin
-
-  tasks:
   - name: Running install-apt
     include_role:
       name: install-apt
@@ -24,11 +19,6 @@
     become: true
     tags: apt
 
-- hosts: unix
-  environment:
-    PATH: /usr/local/opt/python@2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin
-
-  tasks:
   - name: Running apt-updates
     include_role:
       name: apt-updates
@@ -36,33 +26,18 @@
     become: true
     tags: apt
 
-- hosts: unix
-  environment:
-    PATH: /usr/local/opt/python@2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin
-
-  tasks:
   - name: Running pip-upgrade
     include_role:
       name: pip-upgrade
     become: true
     tags: pip
 
-- hosts: unix
-  environment:
-    PATH: /usr/local/opt/python@2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin
-
-  tasks:
   - name: Sync Standard Config Files
     include_role:
       name: sync-config
     become: true
     tags: config
 
-- hosts: unix
-  environment:
-    PATH: /usr/local/opt/python@2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin
-
-  tasks:
   - name: Running brew-updates
     include_role:
       name: brew-updates

@@ -1,0 +1,7 @@
+## {{ ansible_managed }}
+
+{% if apt_sources.lines is defined %}
+{% for lines in apt_sources.lines %}
+{{ lines }}
+{% endfor %}
+{% endif %}

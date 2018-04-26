@@ -11,11 +11,11 @@ HostKey /etc/ssh/ssh_host_rsa_key
 HostKey /etc/ssh/ssh_host_dsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
 HostKey /etc/ssh/ssh_host_ed25519_key
-UsePrivilegeSeparation yes
+UsePrivilegeSeparation Sandbox
 
 # Logging
 SyslogFacility AUTH
-LogLevel INFO
+LogLevel VERBOSE
 
 # Authentication:
 LoginGraceTime 2m
@@ -40,17 +40,18 @@ GSSAPIStoreCredentialsOnRekey yes
 X11Forwarding yes
 X11UseLocalhost no
 PrintMotd no
-PrintLastLog no
+PrintLastLog yes
 TCPKeepAlive yes
 
 MaxStartups 10:30:60
+MaxAuthTries 2
 AcceptEnv LANG LC_*
 Subsystem sftp /usr/lib/openssh/sftp-server
 UsePAM yes
 
 AllowAgentForwarding yes
 AllowTcpForwarding yes
-GatewayPorts yes
+GatewayPorts no
 Pidfile /var/run/sshd.pid
 
 PermitTunnel yes

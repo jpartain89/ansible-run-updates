@@ -1,22 +1,5 @@
 ---
 
-- name: Install New Apps (and save them into the BrewFile)
-  homebrew:
-    state: latest
-    name: "{{ item }}"
-    update_homebrew: yes
-    upgrade_all: yes
-  with_items:
-    - "{{ new_homebrew.apps }}"
-
-- name: Install New Cask Apps
-  homebrew_cask:
-    state: present
-    name: "{{ item }}"
-    update_homebrew: yes
-  with_items:
-    - "{{ new_homebrew.cask }}"
-
 - name: Checking (and if not, overwriting) The BrewFile
   lineinfile:
     dest: ~/.config/brewfile/Brewfile
