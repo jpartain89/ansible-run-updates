@@ -16,6 +16,8 @@
   when:
     - apt_sources is defined
 
+- debug: var=template_sources_list
+
 - name: Force Update Apt Cache - if needed
   meta: flush_handlers
   become: true
