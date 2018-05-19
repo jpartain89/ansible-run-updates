@@ -1,5 +1,8 @@
 ---
 
+- name: Run the Linking Script inside of my Dotfiles Repo
+  command: "{{ git_dir.path }}/dotfiles/linking"
+
 - name: Clone git-autopull's Repo
   git:
     repo: "https://github.com/jpartain89/git-autopull.git"
