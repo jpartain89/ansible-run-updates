@@ -60,3 +60,4 @@
 - name: Wait for Connection
   wait_for_connection:
     delay: 60
+  when: _file_reboot_required.stat.exists

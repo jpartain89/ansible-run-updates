@@ -1,5 +1,16 @@
 ---
 
+- name: Clone git-autopull's Repo
+  git:
+    repo: "https://github.com/jpartain89/git-autopull.git"
+    dest: "{{ git_dir.path }}/git-autopull"
+    recursive: yes
+
+- name: Install/Run git-autopull
+  command: "./git-autopull"
+  args:
+    chdir: "{{ git_dir.path }}/git-autopull"
+
 - name: Stat that the Entry Git Repo is Cloned
   stat:
     path: "{{ git_dir.path }}/{{ default_repo }}"

@@ -1,6 +1,7 @@
 facts.d
 cache
 *.log
+*.pid
 
 .DS_Store
 .DS_Store?

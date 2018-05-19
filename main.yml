@@ -1,36 +1,51 @@
 ---
 
-- hosts: unix
+- hosts: all
   environment:
     PATH: /usr/local/opt/python@2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin
 
   tasks:
+  - name: Running jpartain89.git
+    include_role:
+      name: jpartain89.git
+    environment:
+      PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
+    tags: git
+
   - name: Running git-autopull
     include_role:
       name: git-autopull
     environment:
       PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
-    tags: autopull
+    tags:
+      - autopull
+      - git
 
   - name: Running install-apt
     include_role:
       name: install-apt
     when: ansible_os_family == "Debian"
     become: true
-    tags: apt
+    tags:
+      - apt
+      - updates
 
   - name: Running apt-updates
     include_role:
       name: apt-updates
     when: ansible_os_family == "Debian"
     become: true
-    tags: apt
+    tags:
+      - apt
+      - updates
 
   - name: Running pip-upgrade
     include_role:
       name: pip-upgrade
     become: true
-    tags: pip
+    tags:
+      - pip
+      - updates
 
   - name: Sync Standard Config Files
     include_role:
@@ -44,4 +59,6 @@
     when: ansible_os_family == "Darwin"
     environment:
       PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin"
-    tags: brew
+    tags:
+      - brew
+      - updates
