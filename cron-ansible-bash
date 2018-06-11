@@ -22,10 +22,19 @@
 
 exec 1> >(logger -s -t "$(basename "$0")") 2>&1
 
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
+# This is for my running the script in macOS outside of CRON
+# due to the fact that pip is installed in other, odd areas
+# through HomeBrew.
+if [[ "$(uname)" == "Darwin" ]]; then
+    true
+else
+    export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
+fi
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 PIP_BIN="$(command -v pip)"
+SUDO="$(command -v sudo)"
 ANS_PLAY="$(command -v ansible-playbook)"
 GIT_AUTOPULL="$(command -v git-autopull)"
 PIDFILE="${DIR}/ansible.pid"
@@ -52,7 +61,7 @@ else
 fi
 
 # First, we will install/update ansible using pip
-sudo -H "${PIP_BIN}" install --upgrade ansible 2>&1 || \
+$SUDO -H "${PIP_BIN}" install --upgrade ansible 2>&1 || \
     {
     echo "For some reason, the installation/upgrade of Ansible failed!"; \
     exit 1
