@@ -7,7 +7,7 @@
   tasks:
   - name: Running jpartain89.git
     include_role:
-      name: jpartain89.git
+      name: ../ansible-role-git
     environment:
       PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
     tags: git
