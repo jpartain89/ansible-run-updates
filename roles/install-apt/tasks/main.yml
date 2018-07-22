@@ -24,11 +24,10 @@
 
 - name: Install apt-get Universal Requirements
   apt:
-    name: "{{ item }}"
+    name: "{{ apt_standard_install }}"
     state: latest
     update_cache: yes
     cache_valid_time: "{{ cache_valid_time_var }}"
-  with_items: "{{ apt_standard_install }}"
   become: true
 
 - name: sudo apt-get upgrade

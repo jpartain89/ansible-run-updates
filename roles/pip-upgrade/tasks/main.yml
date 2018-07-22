@@ -2,10 +2,8 @@
 
 - name: Install Universally Used pip Apps
   pip:
-    name: "{{ item }}"
+    name: "{{ universal_pip }}"
     state: latest
-  with_items:
-    - "{{ universal_pip }}"
   failed_when: false
 
 - name: Run my pip-upgrade Script
