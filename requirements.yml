@@ -8,7 +8,6 @@
   scm: git
 - src: jpartain89.install-nginx
 - src: jpartain89.logrotate
-- src: Stouts.openvpn
 - src: jpartain89.install-monit-binary
 - src: git@github.com:jpartain89/ansible-role-configure-monit
   name: jpartain89.configure-monit

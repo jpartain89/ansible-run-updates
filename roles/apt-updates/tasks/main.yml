@@ -2,7 +2,7 @@
 
 - name: Install 3 Base Apt-Utils and Update Cache
   apt:
-    name: "[ aptitude, apt, apt-utils ]"
+    name: "[ 'aptitude', 'apt', 'apt-utils' ]"
     state: latest
     update_cache: yes
     cache_valid_time: 21600
