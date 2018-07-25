@@ -2,10 +2,14 @@
 
 - name: Install 3 Base Apt-Utils and Update Cache
   apt:
-    name: "[ 'aptitude', 'apt', 'apt-utils' ]"
+    name: "{{ item }}"
     state: latest
     update_cache: yes
     cache_valid_time: 21600
+  loop:
+    - aptitude
+    - apt
+    - apt-utils
   become: true
 
 - name: Confirm Universally Required Apps Are Installed
@@ -18,7 +22,7 @@
 
 - name: Run Basic, Safe, Full and Dist Upgrade with apt Module
   apt: upgrade="{{ item }}"
-  with_items:
+  loop:
     - yes
     - safe
     - full
