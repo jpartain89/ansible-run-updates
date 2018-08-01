@@ -3,6 +3,7 @@
 - name: Run rpi-update
   command: '/usr/bin/rpi-update'
   register: _rpi_update
+  become: true
 
 - name: Reboot immediately if there was a change.
   shell: "sleep 5 && reboot"
