@@ -43,19 +43,19 @@
 #- debug: var=_autoclean_apt
 #  when: _autoclean_apt|changed
 
-- name: Check if Reboot is Needed
-  stat:
-    path: /var/run/reboot-required
-  register: _file_reboot_required
+#- name: Check if Reboot is Needed
+#  stat:
+#    path: /var/run/reboot-required
+#  register: _file_reboot_required
 
-- name: Restart Linux Machines if needed
-  shell: sleep 2 && shutdown -r now "Reboot triggered by ansible"
-  ignore_errors: True
-  when: _file_reboot_required.stat.exists
-  async: 1
-  poll: 0
+#- name: Restart Linux Machines if needed
+#  shell: sleep 2 && shutdown -r now "Reboot triggered by ansible"
+#  ignore_errors: True
+#  when: _file_reboot_required.stat.exists
+#  async: 1
+#  poll: 0
 
-- name: Wait for Connection
-  wait_for_connection:
-    delay: 60
-  when: _file_reboot_required.stat.exists
+#- name: Wait for Connection
+#  wait_for_connection:
+#    delay: 60
+#  when: _file_reboot_required.stat.exists
