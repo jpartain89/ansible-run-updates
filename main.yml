@@ -62,8 +62,3 @@
     tags:
       - brew
       - updates
-
-  - name: Running RPI-Update
-    include_role:
-      name: rpi-update
-    when: inventory_hostname in groups['raspberry-pi']
