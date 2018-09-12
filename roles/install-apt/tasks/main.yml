@@ -16,10 +16,30 @@
   when:
     - apt_sources is defined
 
-- debug: var=template_sources_list
+#- debug: var=template_sources_list
 
 - name: Force Update Apt Cache - if needed
   meta: flush_handlers
+  become: true
+
+- name: Install 3 Base Apt-Utils and Update Cache
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 21600
+  loop:
+    - aptitude
+    - apt
+    - apt-utils
+  become: true
+
+- name: Confirm Universally Required Apps Are Installed
+  apt:
+    name: "{{ universal_apt }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 21600
   become: true
 
 - name: Install apt-get Universal Requirements
