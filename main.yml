@@ -8,15 +8,11 @@
   - name: Running jpartain89.git
     include_role:
       name: ../ansible-role-git
-    environment:
-      PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
     tags: git
 
   - name: Running git-autopull
     include_role:
       name: git-autopull
-    environment:
-      PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
     tags:
       - autopull
       - git
@@ -25,7 +21,6 @@
     include_role:
       name: install-apt
     when: ansible_os_family == "Debian"
-    become: true
     tags:
       - apt
       - updates
@@ -34,7 +29,6 @@
     include_role:
       name: apt-updates
     when: ansible_os_family == "Debian"
-    become: true
     tags:
       - apt
       - updates
@@ -42,7 +36,6 @@
   - name: Running pip-upgrade
     include_role:
       name: pip-upgrade
-    become: true
     tags:
       - pip
       - updates
@@ -50,15 +43,12 @@
   - name: Sync Standard Config Files
     include_role:
       name: sync-config
-    become: true
     tags: config
 
   - name: Running brew-updates
     include_role:
       name: brew-updates
     when: ansible_os_family == "Darwin"
-    environment:
-      PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/Cellar:/usr/local/MacGPG2/bin"
     tags:
       - brew
       - updates

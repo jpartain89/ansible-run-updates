@@ -42,6 +42,14 @@
     cache_valid_time: 21600
   become: true
 
+- name: Install Other apt Apps
+  apt:
+    name: "{{ apt_standard_install }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 21600
+  become: true
+
 - name: Install apt-get Universal Requirements
   apt:
     name: "{{ apt_standard_install }}"
