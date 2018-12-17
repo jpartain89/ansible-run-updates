@@ -15,12 +15,14 @@
   become: true
   when:
     - apt_sources is defined
+  failed_when: false
 
 #- debug: var=template_sources_list
 
 - name: Force Update Apt Cache - if needed
   meta: flush_handlers
   become: true
+  failed_when: false
 
 - name: Install 3 Base Apt-Utils and Update Cache
   apt:
@@ -33,6 +35,7 @@
     - apt
     - apt-utils
   become: true
+  failed_when: false
 
 - name: Confirm Universally Required Apps Are Installed
   apt:
@@ -41,6 +44,7 @@
     update_cache: yes
     cache_valid_time: 21600
   become: true
+  failed_when: false
 
 - name: Install Other apt Apps
   apt:
@@ -49,6 +53,7 @@
     update_cache: yes
     cache_valid_time: 21600
   become: true
+  failed_when: false
 
 - name: Install apt-get Universal Requirements
   apt:
@@ -57,12 +62,14 @@
     update_cache: yes
     cache_valid_time: "{{ cache_valid_time_var }}"
   become: true
+  failed_when: false
 
 - name: sudo apt-get upgrade
   apt:
     upgrade: full
   register: upgrade_apt
   become: true
+  failed_when: false
 
 #- debug: var=upgrade_apt
 
@@ -71,6 +78,7 @@
     upgrade: dist
   register: dist_apt
   become: true
+  failed_when: false
 
 #- debug: var=dist_apt
 
@@ -89,6 +97,7 @@
     purge: yes
   register: ara
   become: true
+  failed_when: false
 
 #- debug: var=ara
 
@@ -97,5 +106,6 @@
     'apt-get autoremove --purge -y $(dpkg --list | grep `^rc` | awk `{print $2}`)'
   register: autoremove_rc_apt
   become: true
+  failed_when: false
 
 #- debug: var=autoremove_rc_apt

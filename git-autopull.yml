@@ -1,6 +1,6 @@
 ---
 
-- hosts: all
+- hosts: raspberry-pi
 
   tasks:
     - name: Run git-autopull
