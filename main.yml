@@ -7,7 +7,7 @@
   tasks:
   - name: Running jpartain89.git
     include_role:
-      name: ../ansible-role-git
+      name: jpartain89.git
     tags: git
 
   - name: Running git-autopull
