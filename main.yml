@@ -33,13 +33,6 @@
       - apt
       - updates
 
-  - name: Running pip-upgrade
-    include_role:
-      name: pip-upgrade
-    tags:
-      - pip
-      - updates
-
   - name: Sync Standard Config Files
     include_role:
       name: sync-config
