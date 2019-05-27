@@ -7,6 +7,6 @@
   failed_when: false
 
 - name: Run my pip-upgrade Script
-  script: pip-upgrade
+  shell: "{{ git_dir.path }}/pip-upgrade/pip-upgrade"
   register: _pip_upgrade
   become: true
