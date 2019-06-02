@@ -1,5 +1,33 @@
 ---
 
+- name: Template out sources.list
+  template:
+    src: sources.list.j2
+    dest: /etc/apt/sources.list
+    backup: yes
+    mode: 0644
+    owner: root
+    group: root
+  register: template_sources_list
+  notify: Update Apt Cache
+  become: true
+  when:
+    - apt_sources is defined
+  failed_when: false
+
+- name: Install 3 Base Apt-Utils and Update Cache
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 21600
+  loop:
+    - aptitude
+    - apt
+    - apt-utils
+  become: true
+  failed_when: false
+
 - name: Run Basic, Safe, Full and Dist Upgrade with apt Module
   apt: upgrade="{{ item }}"
   loop:
@@ -9,7 +37,7 @@
     - dist
   register: _upgrade_apt
   failed_when: False
-  become: true
+  become: True
 
 #- debug: var=_upgrade_apt
 #  when: _upgrade_apt|changed
