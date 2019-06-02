@@ -1,5 +1,10 @@
 ---
 
+git_address:
+  ssh: "git@github.com:"
+  url: "https://github.com/"
+  lab: "git@gitlab.com:"
+
 git_dir:
   path: "{{ ansible_user_dir }}/git"
   owner: "{{ ansible_user_uid }}"
