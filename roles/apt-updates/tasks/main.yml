@@ -31,10 +31,10 @@
 - name: Run Basic, Safe, Full and Dist Upgrade with apt Module
   apt: upgrade="{{ item }}"
   loop:
-    - yes
-    - safe
-    - full
-    - dist
+    - "yes"
+    - "safe"
+    - "full"
+    - "dist"
   register: _upgrade_apt
   failed_when: False
   become: True
@@ -46,7 +46,7 @@
   apt: autoremove=yes
   register: _autoclean_apt
   failed_when: False
-  become: true
+  become: True
 
 #- debug: var=_autoclean_apt
 #  when: _autoclean_apt|changed
