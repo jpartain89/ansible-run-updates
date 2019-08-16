@@ -10,6 +10,7 @@
   command: "./git-autopull"
   args:
     chdir: "{{ git_dir.path }}/git-autopull"
+  failed_when: false
 
 - name: Stat that the Entry Git Repo is Cloned
   stat:

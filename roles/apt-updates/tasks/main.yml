@@ -9,7 +9,6 @@
     owner: root
     group: root
   register: template_sources_list
-  notify: Update Apt Cache
   become: true
   when:
     - apt_sources is defined
