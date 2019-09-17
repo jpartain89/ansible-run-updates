@@ -1,0 +1,7 @@
+---
+
+- hosts: all
+
+  roles:
+    - name: Run Pip Upgrade
+      role: ./roles/pip-upgrade

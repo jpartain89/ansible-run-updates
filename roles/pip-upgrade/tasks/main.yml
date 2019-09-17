@@ -6,6 +6,11 @@
     state: latest
   failed_when: false
 
+- name: Clone pip-upgrade Repo
+  git:
+    repo: "{{ git_address.gitlab_ssh }}/jpartain89/pip-upgrade.git"
+    dest: "{{ git_dir.path }}/pip-upgrade"
+
 - name: Run my pip-upgrade Script
   shell: "{{ git_dir.path }}/pip-upgrade/pip-upgrade"
   register: _pip_upgrade
