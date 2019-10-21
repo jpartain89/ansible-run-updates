@@ -7,22 +7,33 @@
     backup: yes
   register: _brewfile_git_update
 
-#- debug: var=_brewfile_git_update
-
-- name: Running brewdate
-  shell: 'brewdate'
-  args:
-    executable: /usr/local/bin/bash
-  register: _brewdate
+- name: Running Brew Update
+  homebrew:
+    update_homebrew: yes
   failed_when: False
 
-#- debug: var=_brewdate
+- name: Running Brew Upgrade
+  homebrew:
+    upgrade_all: yes
+  failed_when: False
 
-#- name: Running BrewFile Update with Clean
-#  shell: '/usr/local/bin/brew-file update -C'
-#  register: _brewfile_update
-#
-#- debug: var=_brewfile_update
+- name: Running Brew Cleanup
+  shell: /usr/local/bin/brew cleanup
+  args:
+    executable: /usr/local/bin/bash
+  failed_when: false
+
+- name: Running Brew Doctor
+  shell: /usr/local/bin/brew doctor
+  args:
+    executable: /usr/local/bin/bash
+  failed_when: false
+
+- name: Running Brew Cask Doctor
+  shell: /usr/local/bin/brew cask doctor
+  args:
+    executable: /usr/local/bin/bash
+  failed_when: false
 
 - name: Running softwareupdate Command
   shell: 'softwareupdate -ia'
@@ -30,5 +41,3 @@
     executable: /usr/local/bin/bash
   register: _softwareupdate
   failed_when: False
-
-#- debug: var=_softwareupdate
