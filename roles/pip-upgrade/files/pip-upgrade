@@ -86,25 +86,35 @@ function exitBlock() {
 
 trap 'exitBlock' EXIT HUP INT QUIT TERM
 
-for i in "${pipArray[@]}"; do
-    apps=$("$i" list --format=columns | awk 'NR>2 { print $1 }' | tr '\n' ' ')
-    if [[ $FLAG == "-l" ]] || [[ $FLAG == "--list" ]]; then
-        echo "################################"
-        echo "The following apps are with $i"
-        echo "$apps"
-    else
-        echo "Updating the installed apps for:"
-        echo "      $i      "
-        echo ""
-        if [[ "$i" == "pip" ]]; then
-            continue
-        else
-            sudo -H $i install -U $apps 2>&1
-        fi
-    fi
+# This takes the above while loop and operates on each found pip version
+# DO NOT QUOTE the pipArray variable here! This will stop the splitting apart
+# of the array!! GAH
+for PIP_ARRAY in ${pipArray[@]}; do
+    # This sets the apps array variable to empty
+    apps=()
+    echo $PIP_ARRAY
+
+    # This uses each of the found pip versions, and lists out the packages
+    # installed with each one, saving it to the `apps` variable
+    while IFS= read -r line2; do
+        apps+=("${line2}")
+    done < <("${PIP_ARRAY}" list --format=columns | awk 'NR>2 { print $1 }')
+
+    # Setting pip to be deleted as upgrading pip separate from homebrew
+    # on macOS borks pip
+    delete=(pip)
+    for target in "${delete[@]}"; do
+        for i in "${!apps[@]}"; do
+            if [[ ${array[i]} == $target ]]; then
+                unset 'array[i]'
+            fi
+        done
+    done
+
+    sudo -H "${PIP_ARRAY}" install -U ${apps[*]}
     unset apps
 
-    if [[ -n "${i}" ]]; then
+    if [[ -n "${PIP_ARRAY}" ]]; then
         echo ""
     fi
 done
