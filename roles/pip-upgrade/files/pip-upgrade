@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-set -e
 # shellcheck disable=SC2086
+# shellcheck disable=SC2068
+set -e
 
 # This script attempts to `find` all of the installed pip executables
 # that are installed in `/usr/local/bin` and `/usr/bin` using `find`
@@ -27,30 +28,31 @@ set -e
 PROGRAM_NAME="pip-upgrade"
 VERSION="2.0.0"
 
-if [[ $# -ge 1 ]]; then FLAG="$1"; fi
-space_PATH="$(echo $PATH | tr : " " )"
+# Setting any command line flags, such as -l or --list
+if [[ $# -ge 1 ]]; then FLAG="${1}"; fi
 
-# This makes sure that the PATH is set correctly
-# The `Cellar` line is there for my macOS machines
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
-[ -e /usr/local/Cellar ] && export PATH="$PATH:/usr/local/Cellar"
+# This is to fix dialog's output on macOS
+export NCURSES_NO_UTF8_ACS=1
+
+# Sets the system path to using spaces instead of colons
+space_PATH="$(echo $PATH | tr : " " )"
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-command -v "$PROGRAM_NAME" 1>/dev/null 2>&1 || {
+command -v "${PROGRAM_NAME}" 1>/dev/null 2>&1 || {
     (
         if [ -x "${DIR}/${PROGRAM_NAME}" ]; then
             sudo ln -svf "${DIR}/${PROGRAM_NAME}" "/usr/local/bin/${PROGRAM_NAME}"
             sudo chmod -R 0775 "/usr/local/bin/${PROGRAM_NAME}"
         else
-            echo "For some reason, linking $PROGRAM_NAME to /usr/local/bin,"
+            echo "For some reason, linking ${PROGRAM_NAME} to /usr/local/bin,"
             echo "failed. My apologies for not being able to figure it out..."
             exit 1
         fi
     )
 }
 
-function usage {
+function usage() {
 cat << EOF
 Usage: pip-upgrade [option]
 
@@ -58,7 +60,7 @@ Usage: pip-upgrade [option]
 
         sudo -H [pip | pip2 | pip3 | etc ] install -U $(installed apps)
 
-    It goes through and tries to find all of the installed "pip" commands across the system using your $PATH variable.
+    It goes through and tries to find all of the installed "pip" commands across the system using your ${PATH} variable.
 
     It then runs one of those "pips --list", and then runs "pip update" against that list.
 
@@ -71,9 +73,11 @@ EOF
 pipArray=()
 
 # This tries to find all of the installed `pip` commands using the system $PATH
+# cycling through each found instance of `pip`, no matter the version.
+## The find line is specifically set this way to make bash happy
 while IFS= read -r line; do
-    pipArray+=("$line")
-done < <(sudo find $space_PATH \( -iname 'pip' -o -iname 'pip[0-9]' -o -iname 'pip[0-9].[0-9]' \) -exec sh -c 'echo "$0"' {} \; )
+    pipArray+=("${line}")
+done < <(sudo find ${space_PATH} \( -iname 'pip' -o -iname 'pip[0-9]' -o -iname 'pip[0-9].[0-9]' \) -exec sh -c 'echo "$@"' {} + )
 
 function exitBlock() {
     unset pipArray apps i
