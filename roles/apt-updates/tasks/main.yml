@@ -38,17 +38,11 @@
   failed_when: False
   become: True
 
-#- debug: var=_upgrade_apt
-#  when: _upgrade_apt|changed
-
 - name: Autoremove Command in apt Module
   apt: autoremove=yes
   register: _autoclean_apt
   failed_when: False
   become: True
-
-#- debug: var=_autoclean_apt
-#  when: _autoclean_apt|changed
 
 #- name: Check if Reboot is Needed
 #  stat:
