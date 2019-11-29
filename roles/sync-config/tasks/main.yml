@@ -4,8 +4,8 @@
   template:
     src: ssh_home_config.j2
     dest: "{{ ansible_env.PWD }}/.ssh/config"
-    owner: "{{ ansible_user_uid }}"
-    group: "{{ ansible_user_gid }}"
+    owner: "{{ ansible_user_uid | int }}"
+    group: "{{ ansible_user_gid | int }}"
     mode: 0644
     backup: yes
   register: _ssh_config
