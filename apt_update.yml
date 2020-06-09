@@ -1,6 +1,6 @@
 ---
 
-- hosts: rpi
+- hosts: linux
   become: true
 
   roles:
