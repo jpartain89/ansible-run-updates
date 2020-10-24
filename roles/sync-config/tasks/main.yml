@@ -10,7 +10,7 @@
     backup: yes
   register: _ssh_config
   failed_when: false
-  become_user: "{{ become_user }}"
+  become_user: "{{ ansible_user_uid }}"
 
 - name: Sync Low Level SSH Configs
   template:

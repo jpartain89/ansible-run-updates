@@ -5,13 +5,13 @@
   tasks:
   - name: Running jpartain89.git
     import_role:
-      name: jpartain89.git
+      name: ansible-role-git
     tags: git
     failed_when: false
 
   - name: Running apt-updates
-    import_role:
-      name: apt-updates
+    import_playbook:
+      name: apt_update.yml
     when: ansible_os_family == "Debian"
     tags:
       - apt
