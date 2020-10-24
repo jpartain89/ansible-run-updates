@@ -10,8 +10,8 @@
     failed_when: false
 
   - name: Running apt-updates
-    import_playbook:
-      name: apt_update.yml
+    import_role:
+      name: install-apt
     when: ansible_os_family == "Debian"
     tags:
       - apt
