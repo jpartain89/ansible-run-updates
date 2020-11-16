@@ -1,9 +1,0 @@
----
-
-- hosts: raspberry-pi
-  become: true
-
-  tasks:
-    - name: Run Raspberry Pi's RPI-Update Role
-      include_role:
-        name: rpi-update
