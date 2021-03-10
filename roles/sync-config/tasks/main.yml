@@ -3,14 +3,14 @@
 - name: Sync SSH Home Config
   template:
     src: ssh_home_config.j2
-    dest: "{{ ansible_user_id }}/.ssh/config"
+    dest: "{{ ansible_user_dir }}/.ssh/config"
     owner: "{{ ansible_user_uid | int }}"
     group: "{{ ansible_user_gid | int }}"
     mode: 0644
     backup: yes
   register: _ssh_config
   failed_when: false
-  become_user: "{{ ansible_user_uid }}"
+  become_user: "{{ ansible_user_id }}"
 
 - name: Sync Low Level SSH Configs
   template:
