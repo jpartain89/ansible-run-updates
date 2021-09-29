@@ -1,0 +1,79 @@
+---
+# install-apt/tasks/main.yml
+# This is to install apps I use on all platforms, and run through all upgrades.
+
+- name: Install Python
+  raw: test -e /usr/bin/python && echo "Exists" || (apt -y update && apt install -y python3)
+  register: python_raw
+  become: true
+  changed_when: "'Exists' not in python_raw.stdout"
+
+#- name: Install Aptitude
+#  raw: test -e /usr/bin/aptitude && echo "Exists"|| (apt-get update && apt-get install aptitude -y)
+#  register: aptitude_raw
+#  become: true
+#  changed_when: "'Exists' not in aptitude_raw.stdout"
+
+#- name: Template out sources.list
+#  template:
+#    src: rpi_sources.list.j2
+#    dest: /etc/apt/sources.list
+#    backup: yes
+#    mode: 0644
+#    owner: root
+#    group: root
+#  register: template_sources_list
+#  notify: Update Apt Cache
+#  become: true
+#  when:
+#    - inventory_hostname in groups['raspberry-pi']
+
+- name: Force Update Apt Cache - if needed
+  meta: flush_handlers
+  become: true
+
+- name: Install apt-get Universal Requirements
+  apt:
+    name: "{{ apt_standard_install }}"
+    state: latest
+    update_cache: true
+    cache_valid_time: "{{ cache_valid_time_var }}"
+  become_user: root
+  become: true
+
+- name: sudo apt-get upgrade
+  apt:
+    upgrade: full
+  register: upgrade_apt
+  become_user: root
+  become: true
+
+- debug: var=upgrade_apt
+
+- name: sudo apt-get dist-upgrade
+  apt:
+    upgrade: dist
+  register: dist_apt
+  become_user: root
+  become: true
+
+- debug: var=dist_apt
+
+- name: sudo apt-get autoclean
+  apt:
+    autoclean: true
+    autoremove: true
+  register: autoclean_apt
+  become_user: root
+  become: true
+
+- debug: var=autoclean_apt
+
+- name: Autoremove "rc" labeled apps
+  shell:
+    'apt-get autoremove --purge -y $(dpkg --list | grep `^rc` | awk `{print $2}`)'
+  register: autoremove_rc_apt
+  become_user: root
+  become: true
+
+- debug: var=autoremove_rc_apt

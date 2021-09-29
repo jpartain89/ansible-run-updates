@@ -3,6 +3,12 @@
 - hosts: all
 
   tasks:
+  - name: Sync Standard Config Files
+    import_role:
+      name: sync-config
+    become: true
+    tags: config
+
   - name: Running git-autopull
     import_role:
       name: git-autopull
@@ -12,7 +18,7 @@
 
   - name: Running apt-updates
     import_role:
-      name: apt-updates
+      name: install-apt
     when: ansible_os_family == "Debian"
     become: true
     tags: apt
@@ -31,8 +37,4 @@
     become: true
     tags: pip
 
-  - name: Sync Standard Config Files
-    import_role:
-      name: sync-config
-    become: true
-    tags: config
+
