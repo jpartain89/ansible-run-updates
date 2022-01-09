@@ -1,0 +1,7 @@
+---
+
+- name: Install Python
+  raw: test -e /usr/bin/python && echo "Exists" || (dnf update && dnf install -y python3 python3-dnf)
+  register: python_raw
+  become: true
+  changed_when: "'Exists' not in python_raw.stdout"

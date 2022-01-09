@@ -1,0 +1,10 @@
+---
+
+- hosts: linux
+  become: true
+
+  tasks:
+    - name: Install DNFs python
+      include_role:
+        name: install-yum
+      when: ansible_os_family == "RedHat"
