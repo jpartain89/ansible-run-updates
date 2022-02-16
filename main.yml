@@ -5,7 +5,7 @@
   tasks:
   - name: Running jpartain89.git
     import_role:
-      name: ansible-role-git
+      name: jpartain89.git
     tags: git
     failed_when: false
 
