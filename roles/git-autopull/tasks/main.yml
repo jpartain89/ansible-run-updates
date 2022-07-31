@@ -2,7 +2,7 @@
 
 - name: Clone git-autopull's Repo
   git:
-    repo: "{{ git_address.ssh }}jpartain89/git-autopull.git"
+    repo: "{{ git_address.github_ssh }}:jpartain89/git-autopull.git"
     dest: "{{ git_dir.path }}/git-autopull"
     recursive: yes
 
@@ -14,7 +14,7 @@
 
 - name: Stat that the Entry Git Repo is Cloned
   stat:
-    path: "{{ git_dir.path }}/{{ default_repo }}"
+    path: "{{ git_dir.path }}/dotfiles"
   register: _git_repo_dotfiles_stat
   failed_when: False
 
@@ -22,18 +22,11 @@
 
 - name: Clone the Dotfiles Repo if its Missing
   git:
-    repo:  "{{ git_address.lab }}jpartain89/dotfiles.git"
-    dest: "{{ git_dir.path }}/{{ default_repo }}"
+    repo:  "{{ git_address.gitlab_ssh }}jpartain89/dotfiles.git"
+    dest: "{{ git_dir.path }}/dotfiles"
     update: yes
   failed_when: False
   when: _git_repo_dotfiles_stat.stat.exists == "false"
 
-- name: Run git-autopull from the Entry Repo
-  shell: /usr/local/bin/git-autopull
-  args:
-    executable: /bin/bash
-    chdir: "{{ git_dir.path }}/{{ default_repo }}"
-  register: _git_autopull_debug
-  failed_when: False
 
 #- debug: var=_git_autopull_debug

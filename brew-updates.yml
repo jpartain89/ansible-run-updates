@@ -1,12 +1,12 @@
 ---
 
-- hosts: macos
+- hosts: all
 
   tasks:
     - name: Running brew-updates
       include_role:
         name: brew-updates
-      when: ansible_os_family == "Darwin"
+      #when: ansible_os_family == "Darwin"
       tags:
         - brew
         - updates

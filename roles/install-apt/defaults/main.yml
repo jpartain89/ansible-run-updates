@@ -1,6 +1,8 @@
 ---
 # first-steps/defaults/main.yml
 
+cache_valid_time_var: 86400
+
 apt_standard_install:
   - sudo
   - htop

@@ -1,11 +1,42 @@
 ---
 
+- name: Check if Homebrew is already installed
+  stat:
+    path: /usr/local/bin/brew
+  register: _brewcheck
+  failed_when: false
+
+- name: Check if Ruby is installed
+  shell: ruby --version
+  register: _rubycheck
+  failed_when: false
+
+- name: Show _rubycheck
+  debug:
+    var: _rubycheck
+- name: Show _brewcheck
+  debug:
+    var: _brewcheck
+
+- name: Install Ruby
+  apt:
+    name: ruby
+    state: latest
+    update_cache: true
+  become: true
+  when: _rubycheck.rc != 0
+
+- name: Install Homebrew
+  script: install-homebrew.sh
+  when: _brewcheck.stat.exists == false
+
 - name: Checking (and if not, overwriting) The BrewFile
   lineinfile:
     dest: ~/.config/brewfile/Brewfile
     line: "{{ brewfile_git_repo }}"
     backup: yes
   register: _brewfile_git_update
+  when: ansible_os_family == "Darwin"
 
 - name: Running Brew Update
   homebrew:
@@ -41,3 +72,4 @@
     executable: /usr/local/bin/bash
   register: _softwareupdate
   failed_when: False
+  when: ansible_os_family == "Darwin"

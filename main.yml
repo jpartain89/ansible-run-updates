@@ -18,17 +18,19 @@
       - updates
     failed_when: false
 
-  - name: Sync Standard Config Files
-    import_role:
-      name: sync-config
-    tags: config
-    failed_when: false
-
   - name: Running brew-updates
     import_role:
       name: brew-updates
-    when: ansible_os_family == "Darwin"
     tags:
       - brew
       - updates
+    failed_when: false
+    #when: ansible_os_family == "Darwin"
+
+  - name: git-autopull
+    import_role:
+      name: git-autopull
+    tags:
+      - git
+      - autopull
     failed_when: false
