@@ -6,8 +6,8 @@
     - name: Run git-autopull
       include_role:
         name: git-autopull
-      environment:
-        PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
+      #environment:
+      #  PATH: "/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin"
       tags:
         - autopull
         - git
