@@ -3,12 +3,6 @@
 - hosts: all
 
   tasks:
-  - name: Running jpartain89.git
-    import_role:
-      name: jpartain89.git
-    tags: git
-    failed_when: false
-
   - name: Running apt-updates
     import_role:
       name: install-apt
@@ -16,6 +10,20 @@
     tags:
       - apt
       - updates
+    failed_when: false
+
+  - name: git-autopull
+    import_role:
+      name: git-autopull
+    tags:
+      - git
+      - autopull
+    failed_when: false
+
+  - name: Running jpartain89.git
+    import_role:
+      name: jpartain89.git
+    tags: git
     failed_when: false
 
   - name: Running brew-updates
